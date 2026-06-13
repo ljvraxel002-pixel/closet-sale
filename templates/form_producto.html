@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ accion }} Producto — Admin</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body class="admin-body">
+
+<nav class="admin-nav">
+  <h1>⚙️ {{ accion }} Producto</h1>
+  <a href="/admin">← Volver al panel</a>
+</nav>
+
+<div class="admin-main">
+  <div class="form-card">
+    <h2>{{ accion }} producto</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label>Nombre *</label>
+        <input type="text" name="nombre" required
+               value="{{ producto.nombre if producto else '' }}"
+               placeholder="Ej. Pantalón de mezclilla azul"/>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Categoría *</label>
+          <select name="categoria" required>
+            {% for cat in ['pantalon','sudadera','perfume'] %}
+            <option value="{{ cat }}"
+              {% if producto and producto.categoria == cat %}selected{% endif %}>
+              {{ cat|capitalize }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Estado</label>
+          <select name="estado">
+            {% for est in ['disponible','apartado','vendido'] %}
+            <option value="{{ est }}"
+              {% if producto and producto.estado == est %}selected{% endif %}>
+              {{ est|capitalize }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Precio (pesos) *</label>
+          <input type="number" name="precio" required min="0" step="0.01"
+                 value="{{ producto.precio if producto else '' }}"
+                 placeholder="150"/>
+        </div>
+
+        <div class="form-group">
+          <label>Talla</label>
+          <input type="text" name="talla"
+                 value="{{ producto.talla if producto else '' }}"
+                 placeholder="M, L, 28, 30…"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Marca</label>
+        <input type="text" name="marca"
+               value="{{ producto.marca if producto else '' }}"
+               placeholder="Nike, Levi's, VARONE… (dejar vacío si no tiene)"/>
+      </div>
+
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea name="descripcion" placeholder="Descripción breve del artículo…">{{ producto.descripcion if producto else '' }}</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Fotografía</label>
+        {% if producto and producto.foto %}
+          <div style="margin-bottom:10px">
+            <img src="/static/uploads/{{ producto.foto }}" alt="foto actual"
+                 style="height:100px;border-radius:8px;object-fit:cover"/>
+            <p style="font-size:12px;color:#8a7060;margin-top:4px">Sube una nueva para reemplazar.</p>
+          </div>
+        {% endif %}
+        <input type="file" name="foto" accept="image/*"/>
+        <span style="font-size:11px;color:#8a7060">PNG, JPG, WEBP — máx. recomendado 3 MB</span>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">💾 Guardar</button>
+        <a href="/admin" class="btn-secondary">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

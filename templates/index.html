@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Venta de Ropa y Perfumes</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────── -->
+<header class="site-header">
+  <div class="header-tag">✦ Catálogo de Venta ✦</div>
+  <h1 class="header-title">Ropa &amp; <em>Perfumes</em></h1>
+  <p class="header-sub">Artículos usados en buen estado. Precios accesibles. ¡Escríbeme sin compromiso!</p>
+  <div class="counter-badge">
+    <span id="contador-disp">—</span> productos disponibles
+  </div>
+  <a href="https://wa.me/{{ whatsapp }}" class="btn-wa" target="_blank">
+    <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.735 5.462 2.02 7.752L0 32l8.48-2.003A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.756-1.844l-.484-.287-5.032 1.188 1.212-4.906-.316-.503A13.26 13.26 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.27-9.926c-.397-.199-2.352-1.16-2.716-1.292-.364-.133-.629-.199-.894.199-.265.397-1.028 1.292-1.26 1.557-.232.265-.464.298-.861.1-.397-.2-1.677-.618-3.194-1.97-1.18-1.052-1.977-2.35-2.21-2.747-.232-.397-.025-.612.175-.81.18-.178.397-.464.596-.696.199-.232.265-.397.397-.662.133-.265.066-.497-.033-.696-.1-.199-.894-2.154-1.225-2.95-.322-.773-.649-.668-.894-.68l-.762-.013c-.265 0-.695.1-1.059.497-.364.397-1.391 1.359-1.391 3.314s1.424 3.845 1.623 4.11c.199.265 2.8 4.278 6.784 5.997.948.409 1.688.653 2.265.836.952.303 1.818.26 2.503.158.763-.114 2.352-.962 2.684-1.889.332-.927.332-1.723.232-1.889-.099-.165-.364-.265-.761-.464z"/></svg>
+    Contactar por WhatsApp
+  </a>
+</header>
+
+<!-- ── TOOLBAR ────────────────────────────── -->
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="search-box">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a7060" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="buscador" placeholder="Buscar producto o marca…" autocomplete="off"/>
+    </div>
+    <div class="filter-chips">
+      <span class="chip chip-cat active"  data-cat="todos">Todos</span>
+      <span class="chip chip-cat"         data-cat="pantalon">Pantalones</span>
+      <span class="chip chip-cat"         data-cat="sudadera">Sudaderas</span>
+      <span class="chip chip-cat"         data-cat="perfume">Perfumes</span>
+    </div>
+    <div class="filter-chips">
+      <span class="chip chip-estado active" data-estado="todos">Todos</span>
+      <span class="chip chip-estado"        data-estado="disponible">Disponible</span>
+      <span class="chip chip-estado"        data-estado="apartado">Apartado</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTENIDO PRINCIPAL ────────────────── -->
+<div class="main-layout">
+
+  <!-- CATÁLOGO -->
+  <section>
+    <div class="catalog-header">
+      <h2>Catálogo</h2>
+    </div>
+    <div class="grid" id="grid-productos"></div>
+    <p id="no-results">No se encontraron productos con esos filtros.</p>
+  </section>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Carrito -->
+    <div class="panel">
+      <div class="panel-head">🛒 Tu pedido <span id="num-carrito"></span></div>
+      <div class="panel-body">
+        <ul id="lista-carrito">
+          <li class="carrito-empty">Sin productos seleccionados</li>
+        </ul>
+        <div class="carrito-total" id="total-wrap" style="display:none">
+          <span>Total</span>
+          <span id="total-carrito">$0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="panel">
+      <div class="panel-head">📋 Datos del pedido</div>
+      <div class="panel-body">
+        <form id="form-pedido" novalidate>
+
+          <div class="form-group">
+            <label for="inp-nombre">Nombre completo *</label>
+            <input type="text" id="inp-nombre" placeholder="Tu nombre" autocomplete="name"/>
+            <span class="form-error" id="err-nombre">El nombre es obligatorio.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="inp-telefono">Teléfono (10 dígitos) *</label>
+            <input type="tel" id="inp-telefono" placeholder="5512345678" maxlength="10" inputmode="numeric"/>
+            <span class="form-error" id="err-tel">Ingresa un teléfono válido de 10 dígitos.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="inp-entrega">Punto de entrega *</label>
+            <select id="inp-entrega">
+              <option value="Entrada principal">Entrada principal</option>
+              <option value="Parque central">Parque central</option>
+              <option value="Tienda OXXO cercana">Tienda OXXO cercana</option>
+              <option value="Área deportiva">Área deportiva</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="inp-comentarios">Comentarios adicionales</label>
+            <textarea id="inp-comentarios" placeholder="Ej. Puedo pasar después de las 6 pm…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-enviar" id="btn-enviar" disabled>
+            <svg width="18" height="18" viewBox="0 0 32 32" fill="currentColor"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.82.735 5.462 2.02 7.752L0 32l8.48-2.003A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.756-1.844l-.484-.287-5.032 1.188 1.212-4.906-.316-.503A13.26 13.26 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.27-9.926c-.397-.199-2.352-1.16-2.716-1.292-.364-.133-.629-.199-.894.199-.265.397-1.028 1.292-1.26 1.557-.232.265-.464.298-.861.1-.397-.2-1.677-.618-3.194-1.97-1.18-1.052-1.977-2.35-2.21-2.747-.232-.397-.025-.612.175-.81.18-.178.397-.464.596-.696.199-.232.265-.397.397-.662.133-.265.066-.497-.033-.696-.1-.199-.894-2.154-1.225-2.95-.322-.773-.649-.668-.894-.68l-.762-.013c-.265 0-.695.1-1.059.497-.364.397-1.391 1.359-1.391 3.314s1.424 3.845 1.623 4.11c.199.265 2.8 4.278 6.784 5.997.948.409 1.688.653 2.265.836.952.303 1.818.26 2.503.158.763-.114 2.352-.962 2.684-1.889.332-.927.332-1.723.232-1.889-.099-.165-.364-.265-.761-.464z"/></svg>
+            Enviar pedido por WhatsApp
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<footer>
+  <strong>Venta de Ropa &amp; Perfumes</strong><br>
+  Artículos usados en buen estado · Precios negociables llevando 2+ prendas 💛
+</footer>
+
+<script>
+  window.WA_NUMBER = "{{ whatsapp }}";
+</script>
+<script src="/static/js/app.js"></script>
+</body>
+</html>

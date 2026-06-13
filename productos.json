@@ -1,0 +1,145 @@
+[
+  {
+    "id": 1,
+    "nombre": "Pantalón de mezclilla azul",
+    "categoria": "pantalon",
+    "precio": 120,
+    "talla": "28",
+    "marca": "",
+    "descripcion": "Pantalón de mezclilla en buen estado, corte recto.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 2,
+    "nombre": "Pantalón negro de vestir",
+    "categoria": "pantalon",
+    "precio": 150,
+    "talla": "30",
+    "marca": "",
+    "descripcion": "Pantalón negro formal, poco uso.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 3,
+    "nombre": "Pantalón caqui",
+    "categoria": "pantalon",
+    "precio": 100,
+    "talla": "29",
+    "marca": "",
+    "descripcion": "Pantalón caqui casual, excelente condición.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 4,
+    "nombre": "Pantalón deportivo gris",
+    "categoria": "pantalon",
+    "precio": 80,
+    "talla": "M",
+    "marca": "",
+    "descripcion": "Pantalón de pants gris, cómodo y ligero.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 5,
+    "nombre": "Pantalón cargo verde",
+    "categoria": "pantalon",
+    "precio": 130,
+    "talla": "31",
+    "marca": "",
+    "descripcion": "Pantalón cargo con bolsillos laterales.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 6,
+    "nombre": "Pantalón de mezclilla gris",
+    "categoria": "pantalon",
+    "precio": 110,
+    "talla": "30",
+    "marca": "",
+    "descripcion": "Mezclilla gris oscuro, corte slim.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 7,
+    "nombre": "Pantalón de mezclilla rasgado",
+    "categoria": "pantalon",
+    "precio": 90,
+    "talla": "28",
+    "marca": "",
+    "descripcion": "Mezclilla con detalle rasgado en rodillas.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 8,
+    "nombre": "Pantalón de lino beige",
+    "categoria": "pantalon",
+    "precio": 140,
+    "talla": "32",
+    "marca": "",
+    "descripcion": "Pantalón de lino ligero, ideal para calor.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 9,
+    "nombre": "Pantalón jogger negro",
+    "categoria": "pantalon",
+    "precio": 95,
+    "talla": "L",
+    "marca": "",
+    "descripcion": "Jogger con ajuste en tobillo.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 10,
+    "nombre": "Sudadera gris con capucha",
+    "categoria": "sudadera",
+    "precio": 180,
+    "talla": "L",
+    "marca": "Nike",
+    "descripcion": "Sudadera Nike gris, en excelente estado.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 11,
+    "nombre": "Sudadera negra básica",
+    "categoria": "sudadera",
+    "precio": 150,
+    "talla": "M",
+    "marca": "",
+    "descripcion": "Sudadera negra sin estampado, suave y abrigadora.",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 12,
+    "nombre": "VARONE — Noche Ámbar",
+    "categoria": "perfume",
+    "precio": 120,
+    "talla": "",
+    "marca": "VARONE",
+    "descripcion": "Fragancia amaderada con notas de vainilla y ámbar. 100 ml. Inspiración (no original).",
+    "foto": "",
+    "estado": "disponible"
+  },
+  {
+    "id": 13,
+    "nombre": "VARONE — Brisa Fresca",
+    "categoria": "perfume",
+    "precio": 120,
+    "talla": "",
+    "marca": "VARONE",
+    "descripcion": "Fragancia cítrica y fresca, ideal para el día. 100 ml. Inspiración (no original).",
+    "foto": "",
+    "estado": "disponible"
+  }
+]

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel Admin — Closet Sale</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body class="admin-body">
+
+<nav class="admin-nav">
+  <h1>⚙️ Panel de Administración</h1>
+  <div style="display:flex;gap:16px;align-items:center">
+    <a href="/" target="_blank">Ver tienda ↗</a>
+    <a href="/admin/logout">Cerrar sesión</a>
+  </div>
+</nav>
+
+<div class="admin-main">
+
+  <!-- RESUMEN -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px">
+    {% set disp = productos|selectattr('estado','equalto','disponible')|list|length %}
+    {% set apar = productos|selectattr('estado','equalto','apartado')|list|length %}
+    {% set vend = productos|selectattr('estado','equalto','vendido')|list|length %}
+
+    <div style="background:#eaf5ee;border-radius:12px;padding:16px 22px;flex:1;min-width:130px">
+      <div style="font-size:22px;font-weight:700;color:#2e7d50">{{ disp }}</div>
+      <div style="font-size:12px;color:#2e7d50;font-weight:600">Disponibles</div>
+    </div>
+    <div style="background:#fdf3e3;border-radius:12px;padding:16px 22px;flex:1;min-width:130px">
+      <div style="font-size:22px;font-weight:700;color:#c47a2a">{{ apar }}</div>
+      <div style="font-size:12px;color:#c47a2a;font-weight:600">Apartados</div>
+    </div>
+    <div style="background:#fdeaea;border-radius:12px;padding:16px 22px;flex:1;min-width:130px">
+      <div style="font-size:22px;font-weight:700;color:#b83232">{{ vend }}</div>
+      <div style="font-size:12px;color:#b83232;font-weight:600">Vendidos</div>
+    </div>
+    <div style="background:#f2ede6;border-radius:12px;padding:16px 22px;flex:1;min-width:130px">
+      <div style="font-size:22px;font-weight:700;color:#5c3d2e">{{ productos|length }}</div>
+      <div style="font-size:12px;color:#5c3d2e;font-weight:600">Total</div>
+    </div>
+  </div>
+
+  <div class="admin-toolbar">
+    <h2>Productos</h2>
+    <a href="/admin/agregar" class="btn-primary">+ Agregar producto</a>
+  </div>
+
+  <div class="admin-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Precio</th>
+          <th>Talla</th>
+          <th>Marca</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in productos %}
+        <tr>
+          <td>
+            {% if p.foto %}
+              <img class="thumb" src="/static/uploads/{{ p.foto }}" alt="{{ p.nombre }}"/>
+            {% else %}
+              <div class="thumb-placeholder">
+                {% if p.categoria == 'perfume' %}🫙
+                {% elif p.categoria == 'sudadera' %}🧥
+                {% else %}👖{% endif %}
+              </div>
+            {% endif %}
+          </td>
+          <td style="font-weight:500;max-width:200px">{{ p.nombre }}</td>
+          <td style="text-transform:capitalize">{{ p.categoria }}</td>
+          <td><strong>${{ p.precio }}</strong></td>
+          <td>{{ p.talla or '—' }}</td>
+          <td>{{ p.marca or '—' }}</td>
+          <td>
+            <select class="estado-select {{ p.estado }}"
+                    data-id="{{ p.id }}"
+                    onchange="cambiarEstado(this)">
+              <option value="disponible" {% if p.estado=='disponible' %}selected{% endif %}>Disponible</option>
+              <option value="apartado"   {% if p.estado=='apartado'   %}selected{% endif %}>Apartado</option>
+              <option value="vendido"    {% if p.estado=='vendido'    %}selected{% endif %}>Vendido</option>
+            </select>
+          </td>
+          <td>
+            <div class="action-btns">
+              <a href="/admin/editar/{{ p.id }}" class="btn-edit">✏️ Editar</a>
+              <form method="POST" action="/admin/eliminar/{{ p.id }}"
+                    onsubmit="return confirm('¿Eliminar «{{ p.nombre }}»? Esta acción no se puede deshacer.')">
+                <button type="submit" class="btn-del">🗑 Eliminar</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="8" style="text-align:center;color:#8a7060;padding:32px">
+          No hay productos. <a href="/admin/agregar">Agrega el primero.</a>
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+async function cambiarEstado(select) {
+  const id     = select.dataset.id;
+  const estado = select.value;
+  select.className = `estado-select ${estado}`;
+
+  try {
+    const res = await fetch(`/admin/estado/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ estado })
+    });
+    if (!res.ok) throw new Error();
+  } catch {
+    alert("Error al actualizar el estado. Intenta de nuevo.");
+    location.reload();
+  }
+}
+</script>
+</body>
+</html>
